@@ -16,6 +16,8 @@ class Biodata extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
+    protected static ?string $navigationLabel = 'Biodata';
+
     protected static string $view = 'filament.pages.biodata';
 
     public $user;
@@ -86,5 +88,12 @@ class Biodata extends Page
             ->success()
             ->body('Your biodata has been updated successfully.')
             ->send();
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'biodata' => Biodata::route('/biodata')
+        ];
     }
 }

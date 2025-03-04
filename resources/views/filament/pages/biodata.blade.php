@@ -3,41 +3,42 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <label class="block text-gray-400 font-medium mb-1">Nama:</label>
-                    <p class="text-gray-900 font-semibold">{{ $user->name }}</p>
-                </div>
+                    <div>
+                        <label class="block text-gray-400 font-medium mb-1">Nama:</label>
+                        <p class="text-gray-900 font-semibold">{{ $user->name }}</p>
+                    </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <label class="block text-gray-400 font-medium mb-1">Nomor Telepon:</label>
-                    <p class="text-gray-900 font-semibold">{{ $user->phone ?? 'Belum diisi' }}</p>
-                </div>
+                    <div>
+                        <label class="block text-gray-400 font-medium mb-1">Nomor Telepon:</label>
+                        <p class="text-gray-900 font-semibold">{{ $user->phone ?? 'Belum diisi' }}</p>
+                    </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <label class="block text-gray-400 font-medium mb-1">Email</label>
-                    <p class="text-gray-900 font-semibold">{{ $user->email }}</p>
+                    <div>
+                        <label class="block text-gray-400 font-medium mb-1">Email</label>
+                        <p class="text-gray-900 font-semibold">{{ $user->email }}</p>
+                    </div>
                 </div>
             </div>
-
             <div class="grid grid-cols-2 gap-6">
                 <div>
                     <label class="block text-gray-400 font-medium mb-1">Foto:</label>
                     <img src="{{ $user->image ? asset('storage/' . $user->image) : asset('images/default-user.png') }}"
                         alt="Gambar" class="w-32 h-auto object-cover rounded-md border cursor-pointer"
-                        x-on:click="dispatch('open-modal', { id: 'image-modal', image: '{{ $user->image ? asset('storage/' . $super->image) : asset('images/default-user.png') }}'})">
+                        x-on:click="dispatch('open-modal', { id: 'image-modal', image: '{{ $user->image ? asset('storage/' . $user->image) : asset('images/default-user.png') }}'})">
                 </div>
 
                 <div>
                     <label class="block text-gray-400 font-medium mb-1">Ijazah:</label>
                     <img src="{{ $user->scanijazah ? asset('storage/' . $user->scanijazah) : asset('images/default-ijazah.png') }}"
                         alt="Gambar" class="w-32 h-auto object-cover rounded-md border cursor-pointer"
-                        x-on:click="dispatch('open-modal', { id: 'image-modal', image: '{{ $user->scanijazah ? asset('storage/' . $super->scanijazah) : asset('images/default-ijazah.png') }}'})">
+                        x-on:click="dispatch('open-modal', { id: 'image-modal', image: '{{ $user->scanijazah ? asset('storage/' . $user->scanijazah) : asset('images/default-ijazah.png') }}'})">
                 </div>
             </div>
         </div>
     </x-filament::section>
 
     <x-filament::section class="mt-3">
-        <form>
+        <form wire:submit.prevent="edit" class="space-y-4">
             {{ $this->form }}
 
             <x-filament::button type="submit" color="primary">Edit</x-filament::button>
